@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, {useState} from "react";
 import "./index.css";
 import Status from './components/status';
 
@@ -7,13 +7,29 @@ import Status from './components/status';
 
 
 const App = () => {
+  const [mode, setMode] = useState('off');
+  const [track, setTrack] = useState(0);
+
+
+  const changeStatus = () => {
+
+    if(mode === 'off') {
+      setMode('on');
+      setTimeout(function(){ setMode('off'); }, 5000);
+    }else {
+      setMode('off')
+    }
+
+  }
+
+
   return (
     <>
       <div className="block">
         <h1>The Light Bulb</h1>
         Your goal: switch the lightbulb on
         <br />
-        <Status />
+
         <br />
         <ul>
           <li>
@@ -49,9 +65,9 @@ const App = () => {
       </div>
 
       <div className="block">
-        <a> turn me on! </a>
+        <a onClick={() => changeStatus()}> turn me on! </a>
         <div className="container">
-          <div className="bulb-light">
+          <div className="bulb-light" className={mode}>
             <div id="light" />
 
             <div id="bulb">
