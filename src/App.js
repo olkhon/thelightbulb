@@ -1,21 +1,30 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {useState} from "react";
 import "./index.css";
-import Status from './components/status';
+
 
 
 
 
 const App = () => {
   const [mode, setMode] = useState('off');
-  const [track, setTrack] = useState(0);
+  let [track, setTrack] = useState(0);
+
 
 
   const changeStatus = () => {
+    let counter = ++track;
+    console.log(counter);
 
     if(mode === 'off') {
-      setMode('on');
-      setTimeout(function(){ setMode('off'); }, 5000);
+      if(track <= 10) {
+        setMode('on');
+        setTimeout(function(){ setMode('off'); }, 5000);
+        setTrack(++track);
+        console.log(track);
+      }else {
+        alert('Your daily eletricity limit is over, use a candle instead!')
+      }
     }else {
       setMode('off')
     }
